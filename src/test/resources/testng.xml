@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2022. smartSense
+  ~
+  -->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke Test" parallel="classes" thread-count="5">
+    <test name="smartSemse">
+        <groups>
+            <run>
+                <include name="Regression"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="com.smartsense.cucumber.*"/>
+        </packages>
+    </test>
+</suite>
