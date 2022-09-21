@@ -17,7 +17,10 @@ import org.testng.annotations.Test;
  * @author Nitin
  * @version 1.0
  */
-@CucumberOptions(tags = "", features = {"src/test/resources/features/signup.feature"}, glue = {"com.smartsense.cucumber.definition.signup"}, plugin = {"com.smartsense.CustomReportListener"})
+@CucumberOptions(tags = "",
+        features = {"src/test/resources/features/signup.feature"},
+        glue = {"com.smartsense.cucumber.definition.signup"},
+        plugin = {"pretty", "com.epam.reportportal.cucumber.StepReporter"})
 @Test(groups = {"Signup", "Regression"})
 public class SignupStepsRunner extends AbstractTestNGCucumberTests {
 

@@ -15,8 +15,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -41,7 +44,17 @@ public class LoginSteps {
     @Before
     public void setUp() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+
+
+     /*   LoggingPreferences preferences = new LoggingPreferences();
+        preferences.enable(LogType.PERFORMANCE, Level.ALL);*/
+
+        ChromeOptions option = new ChromeOptions();
+       /* option.setCapability(CapabilityType.LOGGING_PREFS, preferences);
+        option.setCapability("goog:loggingPrefs", preferences);
+        option.addArguments();*/
+
+        driver = new ChromeDriver(option);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         CommonUtils.driverMap.put(getClass().getName(), driver);
@@ -100,6 +113,8 @@ public class LoginSteps {
     public void teardown(Scenario scenario) {
         if (scenario.isFailed()) {
             CommonUtils.takeScreenshot(driver, scenario.getId());
+            String screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+            LOGGER.info("RP_MESSAGE#BASE64#{}#{}", screenshot, "Invalid image");
         }
         driver.quit();
     }

@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 @CucumberOptions(tags = "",
         features = {"src/test/resources/features/login.feature"},
         glue = {"com.smartsense.cucumber.definition.login"},
-        plugin = {"com.smartsense.CustomReportListener"})
+        plugin = {"pretty", "com.epam.reportportal.cucumber.StepReporter"})
 @Test(groups = {"Login", "Regression"})
 public class LoginStepsRunner extends AbstractTestNGCucumberTests {
 
